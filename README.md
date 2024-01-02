@@ -1,16 +1,18 @@
-# map_my_habits
+## About this project
 
-A new Flutter project.
+1. **Habit Creation**: It will allow you to create a habit that you want to track ... It could have a title, description, and category (health, productivity, etc.).
+2. **Progress and Streak Tracking**: It will allow you to track your progress and streaks for each habit. You can mark a habit as done for a day, and it will keep track of your progress and streaks. It will visualize your progress and streaks in a calendar view.
+3. **Reminders**: It will send you a reminder notification for any habit, in which the timing can be configured in the app.
 
-## Getting Started
+## Pages and progress so far
+- [ ] **Manage Page** - Create, edit, delete habits
+- [ ] **Map Page** - Progress and streak tracking
+- [ ] **Daily Check Page** - Mark a habit as done for a day
 
-This project is a starting point for a Flutter application.
+## Setup
 
-A few resources to get you started if this is your first Flutter project:
+- Clone this repo
+- Run `flutter pub get`
+- Run `flutter run`
+- Enjoy!
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
