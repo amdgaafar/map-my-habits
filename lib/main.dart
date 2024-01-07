@@ -44,9 +44,9 @@ class _MyApp extends State<MyApp> {
           onTap: onTabTapped,
           currentIndex: _currentIndex,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Daily Check"),
-            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Daily Check"),
-            BottomNavigationBarItem(icon: Icon(Icons.manage_search), label: "Daily Check"),
+            BottomNavigationBarItem(icon: Icon(Icons.check_box_outlined), label: "CHECK"),
+            BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: "MAP"),
+            BottomNavigationBarItem(icon: Icon(Icons.manage_search_outlined), label: "SEARCH"),
           ],
         ),
       ),
