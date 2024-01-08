@@ -15,7 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  int _currentIndex = 1;
+  int _currentIndex = 2;
 
   final List<Widget> _children = const [
     DailyCheckPage(title: "Daily Check"),

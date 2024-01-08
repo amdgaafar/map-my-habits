@@ -26,9 +26,33 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:6383552752060314830",
+      "lastPropertyId": "3:1938949581286150958",
+      "name": "Habit",
+      "properties": [
+        {
+          "id": "1:3760742094127629190",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6457296432835190664",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:1938949581286150958",
+          "name": "description",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:6501273769686916005",
+  "lastEntityId": "2:6383552752060314830",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
