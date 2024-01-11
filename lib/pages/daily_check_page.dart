@@ -23,20 +23,21 @@ class _DailyCheckPageState extends State<DailyCheckPage> {
   Box<Habit>? _taskBox;
   bool hasBeenInitialized = false;
 
-  @override
-  void initState() {
-    super.initState();
-    getApplicationDocumentsDirectory().then((dir) => {
-          _store = Store(
-            getObjectBoxModel(),
-            directory: join(dir.path, 'objectbox'),
-          ),
-        });
-
+  Future<void> _initStore() async {
+    final dir = await getApplicationDocumentsDirectory();
+    _store = Store(
+      getObjectBoxModel(),
+      directory: join(dir.path, 'objectbox'),
+    );
     setState(() {
       hasBeenInitialized = true;
     });
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    _initStore();
     for (String task in tasks) {
       checkedTasks[task] = false;
     }
@@ -51,24 +52,39 @@ class _DailyCheckPageState extends State<DailyCheckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title), centerTitle: true),
-      body: ListView.builder(
-        itemCount: tasks.length,
-        itemBuilder: (context, index) {
-          final task = tasks[index];
-          return ListTile(
-            leading: Checkbox(
-              value: checkedTasks[task],
-              onChanged: (checked) {
-                setState(() {
-                  checkedTasks[task] = checked ?? false;
-                });
-              },
-            ),
-            title: Text(task),
-          );
-        },
-      ),
-    );
+        appBar: AppBar(title: Text(widget.title), centerTitle: true),
+        body: FutureBuilder<List<Habit>>(
+          future: _getTasks(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              print(snapshot.error);
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              final tasks = snapshot.data ?? [];
+              return ListView.builder(
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  final task = tasks[index];
+                  return CheckboxListTile(
+                    title: Text(task.title!),
+                    value: checkedTasks[task.title!] ?? false,
+                    onChanged: (value) {
+                      setState(() {
+                        checkedTasks[task.title!] = value!;
+                      });
+                    },
+                  );
+                },
+              );
+            }
+          },
+        ));
+  }
+
+  Future<List<Habit>> _getTasks() async {
+    final query = _store.box<Habit>();
+    return query.getAll();
   }
 }
