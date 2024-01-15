@@ -52,35 +52,45 @@ class _DailyCheckPageState extends State<DailyCheckPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.title), centerTitle: true),
-        body: FutureBuilder<List<Habit>>(
-          future: _getTasks(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              print(snapshot.error);
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else {
-              final tasks = snapshot.data ?? [];
-              return ListView.builder(
-                itemCount: tasks.length,
-                itemBuilder: (context, index) {
-                  final task = tasks[index];
-                  return CheckboxListTile(
-                    title: Text(task.title!),
-                    value: checkedTasks[task.title!] ?? false,
+      appBar: AppBar(title: Text(widget.title), centerTitle: true),
+      body: FutureBuilder<List<Habit>>(
+        future: _getTasks(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            print(snapshot.error);
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final habits = snapshot.data ?? [];
+            return ListView.builder(
+              itemCount: habits.length,
+              itemBuilder: (context, index) {
+                final habit = habits[index];
+                return ListTile(
+                  title: Text(habit.title!),
+                  subtitle: Text(habit.description!),
+                  trailing: Checkbox(
+                    value: habit.habitRecords.any((record) => record.isDone),
                     onChanged: (value) {
                       setState(() {
-                        checkedTasks[task.title!] = value!;
+                        final record = HabitRecord(
+                          date: DateTime.now(),
+                          isDone: value!,
+                          habit: habit,
+                        );
+                        habit.habitRecords.add(record);
+                        _store.box<HabitRecord>().put(record);
                       });
                     },
-                  );
-                },
-              );
-            }
-          },
-        ));
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 
   Future<List<Habit>> _getTasks() async {

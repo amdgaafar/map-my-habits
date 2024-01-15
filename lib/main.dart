@@ -9,7 +9,7 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-  
+
   @override
   State<MyApp> createState() => _MyApp();
 }
@@ -44,9 +44,12 @@ class _MyApp extends State<MyApp> {
           onTap: onTabTapped,
           currentIndex: _currentIndex,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.check_box_outlined), label: "CHECK"),
-            BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: "MAP"),
-            BottomNavigationBarItem(icon: Icon(Icons.manage_search_outlined), label: "SEARCH"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.check_box_outlined), label: "CHECK"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.map_outlined), label: "MAP"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.manage_search_outlined), label: "SEARCH"),
           ],
         ),
       ),

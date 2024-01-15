@@ -50,10 +50,42 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:4171091453381578222",
+      "lastPropertyId": "4:3276935973792810272",
+      "name": "HabitRecord",
+      "properties": [
+        {
+          "id": "1:2139044703003446767",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3600233040167727611",
+          "name": "date",
+          "type": 10
+        },
+        {
+          "id": "3:382333701733712087",
+          "name": "isDone",
+          "type": 1
+        },
+        {
+          "id": "4:3276935973792810272",
+          "name": "habitId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:2342106106232057296",
+          "relationTarget": "Habit"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:6383552752060314830",
-  "lastIndexId": "0:0",
+  "lastEntityId": "3:4171091453381578222",
+  "lastIndexId": "1:2342106106232057296",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
